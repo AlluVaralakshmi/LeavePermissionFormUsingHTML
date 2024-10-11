@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Application Form</title>
+    <link rel="stylesheet" href="external_css.css"> <!-- External CSS -->
+
+    <style>
+        /* Internal CSS */
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            width: 500px;
+            margin: auto;
+            padding: 50px;
+            background-color: #725cf0;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+            font-style: normal;
+
+        }
+        .input-field {
+            width: 450px;
+            row-gap: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+        }
+        
+        .submit-btn {
+            background-color: #4CAF50; /* Green background */
+            color: white;              /* White text */
+            padding: 10px 20px;         /* Padding */
+            border: none;               /* No border */
+            border-radius: 10px;         /* Rounded corners */
+            cursor: pointer;            /* Pointer on hover */
+        }
+        .submit-btn:hover {
+            background-color:blue;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+            const today = new Date().toISOString().split('T')[0];
+            const startDate = document.getElementById("leave_start_date").value;
+            const endDate = document.getElementById("leave_end_date").value;
+            
+            if (startDate < today || endDate < startDate) {
+                alert("Please select valid start and end dates.");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <h1>College Leave Application Form</h1>
+
+    <form action="admin.html" method="GET" onsubmit="return validateForm()">
+        <!-- Inline CSS for the date field (Just for inheritance demonstration) -->
+        <label for="date" style="color: red;">Date (Today's date cannot be chosen):</label>
+        <input type="date" id="date" class="input-field" value="" readonly><br>
+
+        <label for="applicant_name">Applicant Name:</label>
+        <input type="text" id="applicant_name" name="applicant_name" class="input-field" placeholder="e.g.,Ramu" required><br>
+
+        <label for="authority">Authority:</label>
+        <select id="authority" name="authority" class="input-field" required>
+            <option value="principal">Principal</option>
+            <option value="hod">HOD</option>
+        </select><br>
+
+        <label for="leave_reason">Reason for Leave:</label>
+        <textarea id="leave_reason" name="leave_reason" class="input-field" placeholder="Enter your reason for leave" required></textarea><br>
+
+        <label for="leave_start_date">Leave Start Date:</label>
+        <input type="date" id="leave_start_date" name="leave_start_date" class="input-field" required><br>
+
+        <label for="leave_end_date">Leave End Date:</label>
+        <input type="date" id="leave_end_date" name="leave_end_date" class="input-field" required><br>
+
+        <button type="submit" class="submit-btn">Apply</button>
+    </form>
+
+    <script>
+        // Set today's date in the date field
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById("date").value = today;
+    </script>
+
+</body>
+</html>
